@@ -9,7 +9,8 @@ export class App extends Component {
   state = {
     complitedTask: TodoData.complitedtask,
     task: TodoData.task,
-    tasks: TodoData.tasks
+    tasks: TodoData.tasks,
+    preFiltredTasks: TodoData.tasks
   }
 
   changeTodosInfo = (event) => {
@@ -54,12 +55,23 @@ export class App extends Component {
     }));
   }
 
+  filtredTasks = (event) => {
+    const filterValue = event.target.value;
+
+      const filtredTasks = this.state.preFiltredTasks.filter((task) => task.task.title.toLowerCase().includes(filterValue.toLowerCase()));
+
+      console.log(filtredTasks);
+      this.setState({
+        tasks: filtredTasks
+      });
+  }
+
   render() {
     return (
-      <div className="App flex justify-center flex-col max-w-[800px] mx-auto py-5 gap-8">
+      <div className="App flex justify-center flex-col max-w-[600px] mx-auto py-5 gap-8">
         <TodoInfo task={this.state.task} complitedTask={this.state.complitedTask} />
         <CreateTodo addTask={this.addTask} />
-        <TodoFilter />
+        <TodoFilter filtredTasks={this.filtredTasks} />
         <TodoList deleteTask={this.deleteTask} changeTodosInfo={this.changeTodosInfo} tasks={this.state.tasks} />
       </div>
     )
