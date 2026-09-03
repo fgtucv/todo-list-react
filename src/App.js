@@ -60,7 +60,6 @@ export class App extends Component {
 
       const filtredTasks = this.state.preFiltredTasks.filter((task) => task.task.title.toLowerCase().includes(filterValue.toLowerCase()));
 
-      console.log(filtredTasks);
       this.setState({
         tasks: filtredTasks
       });
